@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import MovieDetails from './MovieDetails.jsx';
+import Navbar from "./Navbar.jsx";
 import "./Allmovies.css"
 
 
@@ -38,12 +39,12 @@ function Allmovies() {
   }
 
 
-
  console.log(data, "from the allmovies")
     return (
         <div>
+          <Navbar ChangeView={ChangeView}/>
           <div>
-      <button onClick={ChangeView}>Add new Movie</button>
+      {/* <button onClick={ChangeView}>Add new Movie</button> */}
       </div>
         <div className="search">
         <input className="search_input" placeholder="Search" type="search" onChange={(e)=>setTitle(e.target.value)}  />
