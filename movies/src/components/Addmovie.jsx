@@ -25,7 +25,7 @@ function AddMovie() {
     }
     const handleAdd=()=>{
         console.log("u can post")
-        axios.post("http://localhost:5000/api/movies",movie)
+        axios.post("http://localhost:3001/api/movies/add",movie)
         .then((res)=>{
             alert("Thank you for adding a movie");
             navigate('/home')

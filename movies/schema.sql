@@ -21,9 +21,8 @@ CREATE TABLE IF NOT EXISTS `movies` (
 CREATE TABLE IF NOT EXISTS `users` (
   `iduser` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
-  `hash` varchar(255) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`iduser`),
   UNIQUE KEY `users_email_uindex` (`email`)
 );

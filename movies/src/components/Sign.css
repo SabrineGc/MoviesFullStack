@@ -16,6 +16,7 @@ body{
 	background: url("https://media.istockphoto.com/id/1391013277/vector/realistic-film-stripe-wave-on-blue-background-with-place-for-text-modern-3d-isometric-film.jpg?s=612x612&w=0&k=20&c=HjOQAt6S-ZNh69WRF91LyBPEsVel3Ct0AawbPj8MQBM=") no-repeat center/ cover;
 	border-radius: 10px;
 	box-shadow: 5px 20px 50px #000;
+	margin-left: 10%;
 }
 #chk{
 	display: none;

@@ -13,7 +13,7 @@ function Allmovies() {
     
 
     function fetchData(){
-        axios.get("http://localhost:5000/api/movies")
+        axios.get("http://localhost:3001/api/movies")
         .then((res)=>{
             setData(res.data)
         })
@@ -24,7 +24,7 @@ function Allmovies() {
     fetchData()
   },[])
   const search=(title)=>{
-    axios.get(`http://localhost:5000/api/movies/${title}`)
+    axios.get(`http://localhost:3001/api/movies/${title}`)
     .then((res)=>{
       setData(res.data)
     })

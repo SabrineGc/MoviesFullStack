@@ -6,7 +6,7 @@ import "./MovieDetails.css"
 function MovieDetails({e}) {
     const [detail,setDetail]=useState(false)
     const update=(id,movie)=>{
-        axios.patch(`http://localhost:5000/api/movies/${id}`,movie)
+        axios.patch(`http://localhost:3001/api/movies/update/${id}`,movie)
         .then((res)=>{
             console.log(res.data)
         })
@@ -16,7 +16,7 @@ function MovieDetails({e}) {
     }
     const deleteMovie=(id)=>{
         if(window.confirm("are you sure that u want to delete it")){
-        axios.delete(`http://localhost:5000/api/movies/${id}`)
+        axios.delete(`http://localhost:3001/api/movies/delete/${id}`)
         .then((res)=>{
             console.log(res.data)
         })
