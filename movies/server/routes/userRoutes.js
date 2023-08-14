@@ -3,15 +3,17 @@ var router = require("express").Router();
 
 const {
     getAllusers,
-    addUser,
+    register,
     getOne,
+    login,
     updateUser,
     deleteUser
   }= require("../controller/userCont.js")
 router.get("/",getAllusers)
-router.post("/register",addUser)
+router.post("/register",register)
+router.post("/login",login)
 router.get("/:name",getOne)
-router.patch("update/:iduser",updateUser)
-router.delete("delete/:iduser",deleteUser)
+router.patch("/update/:id",updateUser)
+router.delete("/delete/:id",deleteUser)
 
 module.exports= router

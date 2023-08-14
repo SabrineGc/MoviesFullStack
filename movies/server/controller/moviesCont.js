@@ -1,38 +1,53 @@
-const movies =require('../mydatabase/model/movies.js')
+const { where } = require("sequelize")
+const {Movies} =require("../mydatabase/model/movies.js")
+
+
 module.exports = {
 getAllMovies: function(req,res){
-    movies.getAll((err,results)=>{
-        if(err) res.status(500).send(err)
-        else res.json(results)
-      })
+    Movies.findAll()
+    .then((result) => {
+      console.log(result);  
+      res.status(200).json(result);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
     },
 addMovie: function(req,res){
     const movie=req.body
     console.log(movie)
-    movies.add(movie,(err,results)=>{
-        if(err) res.status(500).send(err)
-        else res.status(201).send("movie added")
-      })
+    Movies.create(movie)
+    .then((result)=>{res.status(201).send(result)})
+    .catch((err)=>{res.status(409).send(err)})
     },
 getOneByTitle: function (req,res){
-    const title=req.params.title
-    movies.getOne(title,(err,results)=>{
-        if(err) res.status(500).send(err)
-        else res.json(results)
-      })
+    Movies.findAll({where: {title: req.params.title}})
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
     },
 updateMovie: function(req, res){
     const id=req.params.id
-    movies.update(id,req.body,(err,results)=>{
-        if(err) res.status(500).send(err)
-        else res.status(200).send(results)
-      })
+    Movies.update(req.body, {where : {id:req.params.id}})
+    .then((result) =>
+      res.status(200).send(result)
+      )
+     .catch((error)=> 
+     res.status(500).send(error)
+     )
 },
 deleteMovie: function (req,res){
     const id=req.params.id
-    movies.delete(id,(err,results)=>{
-        if(err) res.status(500).send(err)
-        else res.status(204).send("movie deleted")
-        })
+    Movies.destroy({where : {id:req.params.id}})
+    .then((result) =>
+      res.status(204).send(result)
+      )
+     .catch((error)=> 
+     res.status(500).send(error)
+     )
+
 }
 }

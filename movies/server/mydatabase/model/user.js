@@ -1,40 +1,23 @@
-const connection = require("../index.js")
+const { Sequelize, DataTypes } = require('sequelize');
+const connection = require("../index.js");
+const sequelize = require('../config.js');
 
 
-module.exports={
-    getAllusers:function(cb){
-        const sql=`SELECT * FROM users`
-        connection.query(sql,function(err,res){
-          cb(err,res)
-        })
-      },
-      adduser:function(user,cb){
-        const sql=`INSERT INTO users SET ?`
-        connection.query(sql,[user],function(err,res){
-          console.log(err,"mehdi")
-          cb(err,res)
-        })
-      },
-      getOneUser:function(name,cb){
-        const sql=`SELECT * FROM users WHERE name='${name}'`
-        connection.query(sql,function(err,res){
-          cb(err,res)
-        })
-      },  
-      updateUser:function(iduser,user,cb){ 
-        const sql=`UPDATE users SET? WHERE iduser='${iduser}'`
-        connection.query(sql,user,function(err,res){
-          console.log(err,"update")
-          cb(err,res)
-        })
-      },
-      deleteUser:function(iduser,cb){
-        const sql=`DELETE FROM users WHERE iduser=${iduser}`
-        connection.query(sql,function(err,res){
-          console.log(err,"delete")
-            cb(err,res)
-        })
-      }
+const User = sequelize.define('User',{
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  email: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    unique: true,
+  },
+  name: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  }
+},{ timestamps: false })
 
-
-}
+module.exports = {User};

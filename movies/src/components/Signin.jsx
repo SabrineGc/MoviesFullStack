@@ -1,8 +1,7 @@
-import axios from 'axios';
 import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
-import { auth, googleAuthProvider } from "../Firebase/index";
+import { auth } from "../Firebase/index";
 import './Sign.css'
 
 function Signin() {
@@ -24,7 +23,8 @@ const form={
 //    })
 //    .catch(error => console.log( error))
 // }
-const handleLogin = async () => {
+const handleLogin = async (event) => {
+  event.preventDefault();
   try {
     const userCredential = await signInWithEmailAndPassword(
       auth,
@@ -34,7 +34,7 @@ const handleLogin = async () => {
     const user = userCredential.user;
     alert("Welcome");
     console.log("User created:", user);
-    navigate("/home");
+    navigate("home");
   } catch (error) {
     alert("Signup first", error.message);
   }
@@ -64,9 +64,9 @@ return (
          <button type="submit" className="btn-primary">
           Submit 
          </button>
-         <a onPress={() => { resetPassword() }}>Forgot password ?</a>
+         <a onClick={resetPassword}>Forgot password ?</a>
        <p>
-         <Link to={`/signup`}>if you dont have account Signup first</Link>
+         <Link to={`/signup`}>if you don't have account Signup first</Link>
        </p>
    </form>
        </div>

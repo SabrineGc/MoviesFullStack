@@ -1,6 +1,13 @@
-module.exports = {
-    host: "localhost",
-    user: "root",
-    password: "sabrine96",
-    database: "filmList",
-  };
+
+const { Sequelize } = require('sequelize');
+
+
+const sequelize = new Sequelize("filmList", "root", "sabrine96", {
+
+  host: "localhost",
+  dialect: "mysql",
+ 
+});
+
+
+module.exports = sequelize;
