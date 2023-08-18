@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import "../App.css"
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -11,22 +11,32 @@ import InputLabel from "@mui/material/InputLabel";
 import axios from "axios";
 
 function EditMovie({ data, open, handleClose, handleEditP }) {
-  const [id, setId] = useState(data.id);
-  const [title, setTitle] = useState(data.title);
-  const [image, setImage] = useState(data.image);
-  const [description, setDescription] = useState(data.description);
-  const [genre, setGenre] = useState(data.genre);
-  const [year, setYear] = useState(data.year);
-  const [director, setDirector] = useState(data.director);
-  const [language, setLanguage] = useState(data.language);
-  const [length, setLength] = useState(data["length"]);
-  const [rate, setRate] = useState(data.rate);
+  const [id, setId] = useState("");
+  const [title, setTitle] = useState("");
+  const [image, setImage] = useState("");
+  const [description, setDescription] = useState("");
+  const [genre, setGenre] = useState("");
+  const [year, setYear] = useState("");
+  const [director, setDirector] = useState("");
+  const [language, setLanguage] = useState("");
+  const [length, setLength] = useState("");
 
-  console.log(data, "data");
+  console.log(data.title, "data");
+  console.log(title,"title");
+  useEffect(() => {
+    console.log(data);
+    setTitle(data?.title);
+    setImage(data?.image);
+    setDescription(data?.description);
+    setGenre(data?.genre);
+    setYear(data?.year);
+    setDirector(data?.director);
+    setLanguage(data?.language);
+    setLength(data?.length);
+  }, [data]);
 
   const handleConfirm = () => {
     const update = {
-      id: id,
       title: title,
       image: image,
       description: description,
@@ -34,14 +44,14 @@ function EditMovie({ data, open, handleClose, handleEditP }) {
       year: year,
       director: director,
       language: language,
-      length: length,
-      rate: rate
+      length: length
     };
 
     axios
-      .put(`http://localhost:3001/api/movies/update/${id}`, update)
+      .patch(`http://localhost:3001/api/movies/update/${data.id}`, update)
       .then((response) => {
-        handleEditP(id, update);
+        console.log(response.data);
+        handleEditP(id, update)
         handleClose();
       })
       .catch((error) => {
@@ -137,18 +147,6 @@ function EditMovie({ data, open, handleClose, handleEditP }) {
               onChange={(e)=>setYear(e.target.value)}
               fullWidth
             />
-               <Grid item xs={12}>
-            <TextField
-              required
-              id="rate"
-              label="rate"
-              type="number"
-              size="small"
-              value={rate}
-              onChange={(e)=>setRate(e.target.value)}
-              fullWidth
-            />
-          </Grid>
           </Grid>
           <Grid item xs={12}>
             <FormControl fullWidth size="small">

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
-import "./Allmovies.css"
+import "../../App.css"
 import OneMovie from '../OneMovie/OneMovies';
 import {
   Card,
@@ -16,6 +16,7 @@ import {
   InputAdornment,
 } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -31,6 +32,7 @@ const [data,setData]=useState([])
 const [open, setOpen] = React.useState(false);
 const [openAdd, setOpenAdd] = React.useState(false);
 const [searchTerm, setSearchTerm] = useState("");
+const [selectedMovie, setSelectedMovie] = useState([]);
 
 
 useEffect(() => {
@@ -48,6 +50,7 @@ useEffect(() => {
  const handleEdit = (movie) => {
     console.log(movie);
     setOpen(true);
+    setSelectedMovie(movie);
     setData(data)
 
   };
@@ -76,6 +79,19 @@ const deleteMovie=(id)=>{
     }
   };
 
+
+  const handleAddToFavorites = (product) => {
+    const cart = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    const existingProduct = cart.find((item) => item._id === product._id);
+
+    if (!existingProduct) {
+      cart.push(product);
+      localStorage.setItem("favorites", JSON.stringify(cart));
+    }
+  };
+
+
   return (
     <div style={{ padding: 30 }}>
       {/* <Stack direction="row">
@@ -102,14 +118,6 @@ const deleteMovie=(id)=>{
           console.log(e,"hehehehehe");
           return (
             <Grid item xs={12} sm={6} md={4} key={e.id}>
-                <div>
-                   <EditMovie
-                        data={e}
-                         open={open}
-                         handleClose={handleClose}
-                         handleEditP={handleEditP}
-                          />
-                          </div>
               <Card sx={{ maxWidth: 345 }}>
                 <CardMedia
                   component="img"
@@ -142,7 +150,13 @@ const deleteMovie=(id)=>{
                       <EditIcon />
                    
                     </IconButton>
-                  
+                    <IconButton
+                      aria-label="Add to Favorites"
+                      color="primary"
+                      onClick={() => handleAddToFavorites(e)}
+                    >
+                      <FavoriteBorder />
+                    </IconButton>
                   </Stack>
                 </CardContent>
               </Card>
@@ -152,7 +166,12 @@ const deleteMovie=(id)=>{
           })}
           
       </Grid>
-  
+      <EditMovie
+                        data={selectedMovie}
+                         open={open}
+                         handleClose={handleClose}
+                         handleEditP={handleEditP}
+                          />
     </div>
   );
 };

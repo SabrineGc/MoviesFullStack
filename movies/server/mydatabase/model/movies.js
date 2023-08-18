@@ -74,7 +74,7 @@ const Movies = sequelize.define('Movies',{
     allowNull: false,
   },
   year:{
-    type: DataTypes.DATE,
+    type: DataTypes.STRING(45),
     allowNull:false
   }
 

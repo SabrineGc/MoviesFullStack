@@ -10,7 +10,7 @@ import { Context } from './components/Context/Context';
 import { ContextProvider } from './components/Context/Context.jsx';
 import Navbar from "./components/Navbar";
 import Allmovies from "./components/Allmovies/Allmovies";
-
+import Layout from "./components/Layout";
 
  function App() {
   const {  fetchData, data }=useContext(Context)
@@ -22,21 +22,17 @@ import Allmovies from "./components/Allmovies/Allmovies";
   
  return (
 
-  <div>
-    <BrowserRouter>
-      <div className="container" style={{ height: "100vh" }}>
-        <h1 className="greeting" >Hello  Movie Addicts</h1>
-        
+    <BrowserRouter> 
+    <Navbar />
         <Routes>
-          <Route path="/" element={<Navbar  />} />
-          <Route index element={<Allmovies />} />
+          {/* <Route path="/" element={<Layout  />} /> */}
+          <Route path="/" element={<Allmovies />} />
           <Route path="/add" element={<Addmovie  />} />
           <Route path="/login" element={<Signin />} />
           <Route path="/signup" element={<Signup />} /> 
         </Routes>
-      </div>
     </BrowserRouter>
-  </div>
+
 
  );
 }

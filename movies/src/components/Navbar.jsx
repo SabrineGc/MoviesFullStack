@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Outlet, Link } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
 import { useNavigate } from 'react-router-dom'
+import "../App.css"
 function Navbar({changeView, setData}) {
   // const [title,setTitle]=useState("")
   // const [term,setTerm]=useState("")
@@ -22,7 +23,8 @@ function Navbar({changeView, setData}) {
   // }
   return (
 <>
-       <AppBar position="static" sx={{ backgroundColor: "#843537" }}>
+
+       <AppBar position="static" sx={{ backgroundColor: "black" }}>
          <Toolbar>
            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
              Movies Addiction
@@ -31,10 +33,10 @@ function Navbar({changeView, setData}) {
              Home
            </Button>
 
-           <Button color="inherit" component={Link} to="/Contact">
-             Contact
+           <Button color="inherit" component={Link} to="/login">
+             se Connecter
           </Button>
-           <Button color="inherit" component={Link} to="/Store">
+           <Button color="inherit" component={Link} to="/add">
              Add
            </Button>
            <Button color="inherit" component={Link} to="/Cart">
