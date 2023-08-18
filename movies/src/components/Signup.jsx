@@ -34,7 +34,7 @@ function Signup() {
    await axios.post("http://localhost:3001/api/users/register", form)
    console.log("User created:", userCredential);
         alert("Welcome to our addiction space");
-        navigate('/');
+        navigate('login');
       }
      
     catch (error) {
@@ -73,7 +73,7 @@ function Signup() {
             <input type="email" name="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
             <input type="password" name="pswd" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
             <div>
-              <Link to={`/`}>signin</Link>
+              <Link to={`/login`}>signin</Link>
             </div>
             <button type="submit" className="btn" onClick={signUpUser}>
               Submit

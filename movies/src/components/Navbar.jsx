@@ -1,26 +1,54 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-function Navbar({changeView}) {
+import React, {useState} from 'react'
+import axios from 'axios'
+import { Outlet, Link } from "react-router-dom";
+import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
+import { useNavigate } from 'react-router-dom'
+function Navbar({changeView, setData}) {
+  // const [title,setTitle]=useState("")
+  // const [term,setTerm]=useState("")
+  const navigate=useNavigate()
+  // const search=(title)=>{
+  //   axios.get(`http://localhost:3001/api/movies/${title}`)
+  //   .then((res)=>{
+  //     setData(res.data)
+  //   })
+  //   .catch((err)=>{console.log(err)})
+  // }
+
+
+
+  // const handleSearch=()=>{
+  //  search(title)
+  // }
   return (
-<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-  <Link className="navbar-brand" to="/add">Add New Movie</Link>
-  <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span className="navbar-toggler-icon"></span>
-  </button>
-  <div className="collapse navbar-collapse" id="navbarNav">
-  <ul className="navbar-nav mr-auto">
-  <li className="nav-item active">
+<>
+       <AppBar position="static" sx={{ backgroundColor: "#843537" }}>
+         <Toolbar>
+           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+             Movies Addiction
+           </Typography>
+           <Button color="inherit" component={Link} to="/">
+             Home
+           </Button>
 
-          <Link className="nav-link " to="/home">Home</Link>
-          </li>
-          <li className="nav-item active">
+           <Button color="inherit" component={Link} to="/Contact">
+             Contact
+          </Button>
+           <Button color="inherit" component={Link} to="/Store">
+             Add
+           </Button>
+           <Button color="inherit" component={Link} to="/Cart">
+             Favorites
+           </Button>
+         </Toolbar>
+       </AppBar>
 
-         <Link className="nav-link " to="/add">Add Review</Link>
-         </li>
-    
-       </ul>
-   </div>
-</nav>  )
+       <div sx={{ marginTop: 2, maxWidth: false }}>
+         <Outlet />
+       </div>
+</> 
+ )
 }
 
 export default Navbar
+

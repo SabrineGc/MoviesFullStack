@@ -34,7 +34,7 @@ const handleLogin = async (event) => {
     const user = userCredential.user;
     alert("Welcome");
     console.log("User created:", user);
-    navigate("home");
+    navigate("/");
   } catch (error) {
     alert("Signup first", error.message);
   }
@@ -52,26 +52,27 @@ const resetPassword = () => {
 }
 
 return (
-  <div className="main">  	
-    <input type="checkbox" id="chk" aria-hidden="true"></input>
-    <div class="signin">
-   <form className="container"  onSubmit={handleLogin}>
+  <div class="form-container">
+      <form class="form" onSubmit={handleLogin}>
+        <div class="form-group">
+          <label for="email">Login</label>
+          <input type="email" id="email" name="email" placeholder="Email"  onChange={(e)=>setEmail(e.target.value)} />
+	       	<input type="password" name="pswd" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} />
+        </div>
 
-     <label for="chk" aria-hidden="true">Login</label>
-    
-        <input type="email" name="email" placeholder="Email"  onChange={(e)=>setEmail(e.target.value)} />
-		<input type="password" name="pswd" placeholder="Password" onChange={(e)=>setPassword(e.target.value)} />
-         <button type="submit" className="btn-primary">
+
+         <button type="submit"  class="form-submit-btn">
           Submit 
          </button>
          <a onClick={resetPassword}>Forgot password ?</a>
        <p>
          <Link to={`/signup`}>if you don't have account Signup first</Link>
        </p>
-   </form>
-       </div>
-     </div>
+       </form>
+    </div>
 )
 }
 
 export default Signin
+
+      
