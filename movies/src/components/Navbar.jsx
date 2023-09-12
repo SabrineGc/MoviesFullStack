@@ -1,10 +1,11 @@
-import React, {useState} from 'react'
-import axios from 'axios'
+import React, {useState} from 'react';
 import { Outlet, Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
+import { AppBar, Toolbar, Box, Typography, Button, Container } from "@mui/material";
 import { useNavigate } from 'react-router-dom'
+import AddMovie from './Addmovie';
 import "../App.css"
 function Navbar({changeView, setData}) {
+  const [openAdd, setOpenAdd] = React.useState(false);
   // const [title,setTitle]=useState("")
   // const [term,setTerm]=useState("")
   const navigate=useNavigate()
@@ -16,7 +17,10 @@ function Navbar({changeView, setData}) {
   //   .catch((err)=>{console.log(err)})
   // }
 
-
+  const handleOpenAdd = () => {
+    console.log("Add button clicked"); // Check if this log appears in the console
+    setOpenAdd(true);
+  };
 
   // const handleSearch=()=>{
   //  search(title)
@@ -34,11 +38,12 @@ function Navbar({changeView, setData}) {
            </Button>
 
            <Button color="inherit" component={Link} to="/login">
-             se Connecter
+             Login
           </Button>
-           <Button color="inherit" component={Link} to="/add">
-             Add
-           </Button>
+          <Button variant="contained" onClick={handleOpenAdd} color="inherit" component={Link} to="/add">
+                Add
+          </Button>
+          <AddMovie openAdd={openAdd} />
            <Button color="inherit" component={Link} to="/Cart">
              Favorites
            </Button>

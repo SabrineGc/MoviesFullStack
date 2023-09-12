@@ -30,7 +30,6 @@ import AddMovie from '../Addmovie';
 function Allmovies() {
 const [data,setData]=useState([])
 const [open, setOpen] = React.useState(false);
-const [openAdd, setOpenAdd] = React.useState(false);
 const [searchTerm, setSearchTerm] = useState("");
 const [selectedMovie, setSelectedMovie] = useState([]);
 
@@ -46,6 +45,7 @@ useEffect(() => {
       console.error("Error fetching data:", error);
     });
 }, []);
+
 
  const handleEdit = (movie) => {
     console.log(movie);
@@ -94,6 +94,11 @@ const deleteMovie=(id)=>{
 
   return (
     <div style={{ padding: 30 }}>
+             {/* <Box flexGrow={1}>
+          <Button variant="contained" onClick={() => handleOpenAdd()}>
+            Add Product
+          </Button>
+        </Box>   */}
       {/* <Stack direction="row">
 
 
@@ -172,6 +177,8 @@ const deleteMovie=(id)=>{
                          handleClose={handleClose}
                          handleEditP={handleEditP}
                           />
+      {/* <AddMovie openAdd={openAdd} handleClose={handleClose} /> */}
+
     </div>
   );
 };

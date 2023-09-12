@@ -34,7 +34,7 @@ function Signup() {
    await axios.post("http://localhost:3001/api/users/register", form)
    console.log("User created:", userCredential);
         alert("Welcome to our addiction space");
-        navigate('login');
+        navigate('/login');
       }
      
     catch (error) {
